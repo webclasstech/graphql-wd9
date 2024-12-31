@@ -36,7 +36,12 @@ const MemberType = new GraphQLObjectType({
     name: { type: GraphQLString },
     dl: { type: GraphQLString },
     _id: { type: GraphQLString },
-    // cars: { type: new GraphQLList(CarType) },
+    cars: {
+      type: new GraphQLList(CarType),
+      resolve(parent, args) {
+        return myrepository.getAllCarsByMemberId(parent.member._id);
+      },
+    },
   }),
 });
 

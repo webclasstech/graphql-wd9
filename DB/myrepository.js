@@ -118,3 +118,12 @@ const getMemberById = async (theIdOfMember) => {
 module.exports.getMemberById = getMemberById;
 
 // ===================================================
+const getAllCarsByMemberId = async (theMemberId) => {
+  try {
+    const x = await Car.find({ member: { _id: theMemberId } });
+    return x;
+  } catch (err) {
+    console.error("Error while getAllCarsByMemberId member: ", err);
+  }
+};
+module.exports.getAllCarsByMemberId = getAllCarsByMemberId;
