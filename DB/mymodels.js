@@ -34,7 +34,7 @@ const carSchema = new mongoose.Schema({
     maxLength: 30,
     validate: {
       validator: (val) => {
-        let condition1 = val.includes("s");
+        let condition1 = true; //val.includes("s");
         let condition2 = val.length < 30;
         return condition1 && condition2;
       },
