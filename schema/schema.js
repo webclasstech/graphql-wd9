@@ -19,7 +19,14 @@ const CarType = new GraphQLObjectType({
     year: { type: GraphQLInt },
     plate: { type: GraphQLString },
     _id: { type: GraphQLString },
-    // member: { type: MemberType },
+    member: {
+      type: MemberType,
+      resolve(parent, args) {
+        // this code runs on mongoose, (not on graphql!!)
+        // parent.member._id desribes in terms of graphql
+        return myrepository.getMemberById(parent.member._id);
+      },
+    },
   }),
 });
 
