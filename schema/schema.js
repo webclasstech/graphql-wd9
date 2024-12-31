@@ -23,6 +23,16 @@ const CarType = new GraphQLObjectType({
   }),
 });
 
+const MemberType = new GraphQLObjectType({
+  name: "Member",
+  fields: () => ({
+    name: { type: GraphQLString },
+    dl: { type: GraphQLString },
+    _id: { type: GraphQLString },
+    // cars: { type: new GraphQLList(CarType) },
+  }),
+});
+
 const RootQueryType = new GraphQLObjectType({
   name: "MyRootQuery",
   fields: () => ({
@@ -31,6 +41,13 @@ const RootQueryType = new GraphQLObjectType({
       args: { _id: { type: GraphQLString } },
       resolve(parent, theArgs) {
         return myrepository.getCarById(theArgs._id);
+      },
+    },
+    member: {
+      type: MemberType,
+      args: { _id: { type: GraphQLString } },
+      resolve(parent, theArgs) {
+        return myrepository.getMemberById(theArgs._id);
       },
     },
   }),

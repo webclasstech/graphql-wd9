@@ -105,3 +105,16 @@ const getCarById = async (theIdOfCar) => {
 module.exports.getCarById = getCarById;
 
 // ===================================================
+
+const getMemberById = async (theIdOfMember) => {
+  try {
+    let x = await Member.findOne({ _id: theIdOfMember });
+    console.log("getMemberById", x);
+    return x;
+  } catch (err) {
+    console.error("Error while getMemberById member: ", err);
+  }
+};
+module.exports.getMemberById = getMemberById;
+
+// ===================================================

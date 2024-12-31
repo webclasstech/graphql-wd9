@@ -14,3 +14,4 @@ start nodejs project:
 to run app:
 
     node app.js
+    node --watch app.js
