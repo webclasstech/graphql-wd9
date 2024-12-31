@@ -28,8 +28,20 @@ const memberSchema = new mongoose.Schema({
 
 const carSchema = new mongoose.Schema({
   manufacture: String,
-  model: String,
-  year: Number,
+  model: {
+    type: String,
+    minLength: 2,
+    maxLength: 30,
+    validate: {
+      validator: (val) => {
+        let condition1 = val.includes("s");
+        let condition2 = val.length < 30;
+        return condition1 && condition2;
+      },
+      message: "value for model must include 's' and be 2-30 characters",
+    },
+  },
+  year: { type: Number, min: 1920, max: 2025 },
   plate: String,
   member: { type: mongoose.Schema.Types.ObjectId, ref: "Member" },
 });
