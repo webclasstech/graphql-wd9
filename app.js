@@ -1,6 +1,27 @@
 //  npm i dotenv graphql mongoose express express-graphql
 const myrepository = require("./DB/myrepository.js");
 
+const express = require("express");
+const app = express();
+
+const expressGraphql = require("express-graphql");
+
+const { graphqlHTTP } = expressGraphql;
+
+const theSchema = require("./schema/schema.js");
+
+app.use(
+  "/graphql",
+  graphqlHTTP({
+    schema: theSchema,
+    graphiql: true,
+  })
+);
+const thePort = process.env.PORT || 14444;
+app.listen(thePort, () => {
+  console.log("Server is listenning on port: ", thePort);
+});
+//==================================================
 // myrepository.getAllCars();
 
 // myrepository.addNewCar({
@@ -12,9 +33,22 @@ const myrepository = require("./DB/myrepository.js");
 
 // myrepository.deleteCarById("6773dd3ea76fbbbffbad866c");
 
-myrepository.getCarById("6773dd2c80327f021ed5b72a").then((a) => {
-  console.log(a);
-});
+// myrepository.getCarById("6773dd2c80327f021ed5b72a").then((a) => {
+//   //console.log(a);
+// });
+
+// myrepository
+//   .updateCarById("6773dd2c80327f021ed5b72a", {
+//     manufacturer: "Subaru",
+//     model: "Crosstech",
+//     year: 2020,
+//     plate: "22dd220",
+//   })
+//   .then(() => {
+//     myrepository.getCarById("6773dd2c80327f021ed5b72a").then((a) => {
+//       console.log(a);
+//     });
+//   });
 
 // myrepository.addNewCarAndNewMember(
 //   {

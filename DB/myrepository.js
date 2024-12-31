@@ -63,22 +63,22 @@ module.exports.addNewCarAndNewMember = addNewCarAndNewMember;
 
 // ==========================================
 
-// const updateCarById = async (carId, carInfo) => {
-//   try {
-//     const x = await Car.updateOne({ _id: carId }, carInfo);
-//     console.log("updateCarById", x);
-//   } catch (err) {
-//     console.error("Error while updating a new car: ", err);
-//   }
-// };
-const updateCarById = async (carInfo) => {
+const updateCarById = async (theIdOfTheCarToUpdate, carInfo) => {
   try {
-    const x = await Car.updateOne({ _id: carInfo._id }, carInfo);
+    const x = await Car.updateOne({ _id: theIdOfTheCarToUpdate }, carInfo);
     console.log("updateCarById", x);
   } catch (err) {
-    console.error("Error while updating car: ", err);
+    console.error("Error while updating a new car: ", err);
   }
 };
+// const updateCarById = async (carInfo) => {
+//   try {
+//     const x = await Car.updateOne({ _id: carInfo._id }, carInfo);
+//     console.log("updateCarById", x);
+//   } catch (err) {
+//     console.error("Error while updating car: ", err);
+//   }
+// };
 module.exports.updateCarById = updateCarById;
 
 // ===================================================

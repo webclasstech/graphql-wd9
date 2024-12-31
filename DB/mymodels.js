@@ -27,7 +27,7 @@ const memberSchema = new mongoose.Schema({
 });
 
 const carSchema = new mongoose.Schema({
-  manufacture: String,
+  manufacturer: String,
   model: {
     type: String,
     minLength: 2,
