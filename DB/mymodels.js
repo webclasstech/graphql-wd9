@@ -13,8 +13,9 @@ const connectAtlas = () => {
       console.log("Error while trying to connect to MongoDB", err);
     });
 };
+connectAtlas();
 
-const membersSchema = new mongoose.Schema({
+const memberSchema = new mongoose.Schema({
   name: String,
   dl: String, //driver license
   cars: [
@@ -24,3 +25,14 @@ const membersSchema = new mongoose.Schema({
     },
   ],
 });
+
+const carSchema = new mongoose.Schema({
+  manufacture: String,
+  model: String,
+  year: Number,
+  plate: String,
+  member: { type: mongoose.Schema.Types.ObjectId, ref: "Member" },
+});
+
+module.exports.Member = mongoose.model("Member", memberSchema);
+module.exports.Car = mongoose.model("Car", carSchema);
