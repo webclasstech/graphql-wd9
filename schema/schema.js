@@ -7,6 +7,7 @@ const {
   GraphQLObjectType,
   GraphQLString,
   GraphQLInt,
+  GraphQLBoolean,
   GraphQLList,
   GraphQLSchema,
 } = graphql;
@@ -36,6 +37,7 @@ const MemberType = new GraphQLObjectType({
     name: { type: GraphQLString },
     dl: { type: GraphQLString },
     _id: { type: GraphQLString },
+    isAdmin: { type: GraphQLBoolean },
     cars: {
       type: new GraphQLList(CarType),
       resolve(parent, args) {
@@ -59,7 +61,13 @@ const RootQueryType = new GraphQLObjectType({
       type: MemberType,
       args: { _id: { type: GraphQLString } },
       resolve(parent, theArgs) {
-        return myrepository.getMemberById(theArgs._id);
+        return myrepository.getMemberById(theArgs._id).data.member;
+      },
+    },
+    cars: {
+      type: new GraphQLList(CarType),
+      resolve(parent, theArgs) {
+        return myrepository.getAllCars();
       },
     },
   }),

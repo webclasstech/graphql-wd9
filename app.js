@@ -17,6 +17,7 @@ app.use(
     graphiql: true,
   })
 );
+app.use(express.static("public"));
 const thePort = process.env.PORT || 14444;
 app.listen(thePort, () => {
   console.log("Server is listenning on port: ", thePort);

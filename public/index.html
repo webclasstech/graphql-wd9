@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Graphql demo</h1>
+    <script>
+      const fetchCarByID = (theIdOfCar) => {
+        console.log("fetchCarByID", theIdOfCar);
+        const myHost = window.location.host;
+        // let url = "http://localhost:10000/graphql";
+        const url = `http://` + myHost + `/graphql`;
+        console.log("GraphQL url:", url);
+        // reference: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type
+
+        const myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        let myRequestOptions = {
+          method: "POST",
+          headers: myHeaders,
+          body: JSON.stringify({
+            query: "query($id:String){car(_id:$id){year, manufacturer, model}}",
+            variables: { id: theIdOfCar },
+          }),
+        };
+        fetch(url, myRequestOptions)
+          .then((dataFromAPI) => {
+            return dataFromAPI.json();
+          })
+          .then((dataAsObj) => {
+            console.log(dataAsObj);
+          })
+          .catch((err) => {
+            console.log("error while fetching from GraphQL:", err);
+          });
+      };
+      fetchCarByID("6773b751e235d48537c383b2");
+
+      const fetchAllCars = () => {
+        console.log("fetchAllCars");
+        const myHost = window.location.host;
+        // let url = "http://localhost:10000/graphql";
+        const url = `http://` + myHost + `/graphql`;
+        console.log("GraphQL url:", url);
+        // reference: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type
+
+        const myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        let myRequestOptions = {
+          method: "POST",
+          headers: myHeaders,
+          body: JSON.stringify({
+            query: "query{cars{year, manufacturer, model}}",
+          }),
+        };
+        fetch(url, myRequestOptions)
+          .then((dataFromAPI) => {
+            return dataFromAPI.json();
+          })
+          .then((dataAsObj) => {
+            console.log(dataAsObj);
+          })
+          .catch((err) => {
+            console.log("error while fetching from GraphQL:", err);
+          });
+      };
+      fetchAllCars();
+    </script>
+  </body>
+</html>

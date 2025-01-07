@@ -6,6 +6,7 @@ const Member = carsAndMembersModels.Member;
 const getAllCars = async () => {
   const x = await Car.find();
   console.log("getAllCars", x);
+  return x;
 };
 module.exports.getAllCars = getAllCars;
 
