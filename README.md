@@ -16,6 +16,6 @@ to run app:
     node app.js
     node --watch app.js
 
-HW: add collection 'products' and allfunctions to myrepository.js, mymodels.js, schema.js, in a same way as we did in a class today.
+HW: add collection 'products' and all functions to myrepository.js, mymodels.js, schema.js, in a same way as we did in a class today.
 
 reference for Content-Type format: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type
