@@ -61,13 +61,19 @@ const RootQueryType = new GraphQLObjectType({
       type: MemberType,
       args: { _id: { type: GraphQLString } },
       resolve(parent, theArgs) {
-        return myrepository.getMemberById(theArgs._id).data.member;
+        return myrepository.getMemberById(theArgs._id);
       },
     },
     cars: {
       type: new GraphQLList(CarType),
       resolve(parent, theArgs) {
         return myrepository.getAllCars();
+      },
+    },
+    members: {
+      type: new GraphQLList(MemberType),
+      resolve(parent, theArgs) {
+        return myrepository.getAllMembers();
       },
     },
   }),

@@ -128,3 +128,11 @@ const getAllCarsByMemberId = async (theMemberId) => {
   }
 };
 module.exports.getAllCarsByMemberId = getAllCarsByMemberId;
+
+// ====================================================
+const getAllMembers = async () => {
+  const x = await Member.find();
+  console.log("getAllMembers", x);
+  return x;
+};
+module.exports.getAllMembers = getAllMembers;

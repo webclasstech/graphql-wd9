@@ -8,13 +8,13 @@
   <body>
     <h1>Graphql demo</h1>
     <script>
+      const myHost = window.location.host;
+      // let url = "http://localhost:10000/graphql";
+      const url = `http://` + myHost + `/graphql`;
+      console.log("GraphQL url:", url);
+
       const fetchCarByID = (theIdOfCar) => {
         console.log("fetchCarByID", theIdOfCar);
-        const myHost = window.location.host;
-        // let url = "http://localhost:10000/graphql";
-        const url = `http://` + myHost + `/graphql`;
-        console.log("GraphQL url:", url);
-        // reference: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type
 
         const myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
@@ -42,11 +42,6 @@
 
       const fetchAllCars = () => {
         console.log("fetchAllCars");
-        const myHost = window.location.host;
-        // let url = "http://localhost:10000/graphql";
-        const url = `http://` + myHost + `/graphql`;
-        console.log("GraphQL url:", url);
-        // reference: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type
 
         const myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
@@ -56,6 +51,32 @@
           headers: myHeaders,
           body: JSON.stringify({
             query: "query{cars{year, manufacturer, model}}",
+          }),
+        };
+        fetch(url, myRequestOptions)
+          .then((dataFromAPI) => {
+            return dataFromAPI.json();
+          })
+          .then((dataAsObj) => {
+            console.log(dataAsObj);
+          })
+          .catch((err) => {
+            console.log("error while fetching from GraphQL:", err);
+          });
+      };
+      fetchAllCars();
+
+      const fetchAllMembers = () => {
+        console.log("fetchAllMembers");
+
+        const myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        let myRequestOptions = {
+          method: "POST",
+          headers: myHeaders,
+          body: JSON.stringify({
+            query: "query{members{_id, name, dl,cars}}",
           }),
         };
         fetch(url, myRequestOptions)
