@@ -12,7 +12,7 @@
       // let url = "http://localhost:10000/graphql";
       const url = `http://` + myHost + `/graphql`;
       console.log("GraphQL url:", url);
-
+      // ====================================================
       const fetchCarByID = (theIdOfCar) => {
         console.log("fetchCarByID", theIdOfCar);
 
@@ -39,7 +39,7 @@
           });
       };
       fetchCarByID("6773b751e235d48537c383b2");
-
+      // ====================================================
       const fetchAllCars = () => {
         console.log("fetchAllCars");
 
@@ -65,7 +65,7 @@
           });
       };
       fetchAllCars();
-
+      // ====================================================
       const fetchAllMembers = () => {
         console.log("fetchAllMembers");
 
@@ -76,7 +76,8 @@
           method: "POST",
           headers: myHeaders,
           body: JSON.stringify({
-            query: "query{members{_id, name, dl,cars}}",
+            query:
+              "query{members{_id, name, dl,cars{manufacturer, member{dl, _id}, year}}}",
           }),
         };
         fetch(url, myRequestOptions)
@@ -90,7 +91,7 @@
             console.log("error while fetching from GraphQL:", err);
           });
       };
-      fetchAllCars();
+      fetchAllMembers();
     </script>
   </body>
 </html>
