@@ -18,6 +18,7 @@ connectAtlas();
 const memberSchema = new mongoose.Schema({
   name: String,
   dl: String, //driver license
+  isAdmin: Boolean,
   cars: [
     {
       type: mongoose.Schema.Types.ObjectId,

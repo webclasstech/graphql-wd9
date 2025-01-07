@@ -23,10 +23,10 @@
           method: "POST",
           headers: myHeaders,
           body: JSON.stringify({
-            //   query: "query($id:String){car(_id:$id){year, manufacturer, model}}",
-            //   variables: { id: theIdOfCar },
+            query: "query($id:String){car(_id:$id){year, manufacturer, model}}",
+            variables: { id: theIdOfCar },
             // this a same one , but shorter:
-            query: `query{car(_id:${theIdOfCar}}){year, manufacturer, model}}`,
+            //query: `query{car(_id:"${theIdOfCar}"}){year, manufacturer, model}}`,
           }),
         };
         fetch(url, myRequestOptions)
@@ -105,7 +105,7 @@
       //   }
 
       const addNewCarToGraphQL = () => {
-        console.log("fetchAllMembers");
+        console.log("addNewCarToGraphQL");
 
         const myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
@@ -129,7 +129,35 @@
             console.log("error while fetching from GraphQL:", err);
           });
       };
-      addNewCarToGraphQL();
+      // addNewCarToGraphQL();
+
+      //====================================================================
+      const addNewMemberToGraphQL = () => {
+        console.log("addNewMemberToGraphQL");
+
+        const myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        let myRequestOptions = {
+          method: "POST",
+          headers: myHeaders,
+          body: JSON.stringify({
+            query:
+              'mutation{addMember(dl:"1212111",name:"Moshe",isAdmin:false){_id, name, dl, isAdmin}}',
+          }),
+        };
+        fetch(url, myRequestOptions)
+          .then((dataFromAPI) => {
+            return dataFromAPI.json();
+          })
+          .then((dataAsObj) => {
+            console.log(dataAsObj);
+          })
+          .catch((err) => {
+            console.log("error while fetching from GraphQL:", err);
+          });
+      };
+      addNewMemberToGraphQL();
     </script>
   </body>
 </html>

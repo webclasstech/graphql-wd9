@@ -23,6 +23,15 @@ const addNewCar = async (carInfo) => {
 };
 module.exports.addNewCar = addNewCar;
 
+// ==============================================
+const addNewMember = async (theNewMember) => {
+  let newMember = new Member(theNewMember);
+  let x = await newMember.save();
+
+  return x;
+};
+module.exports.addNewMember = addNewMember;
+
 // ========================================== =
 const addNewCarAndNewMember = async (carInfo, ownerInfo) => {
   try {

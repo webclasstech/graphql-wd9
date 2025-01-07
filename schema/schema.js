@@ -99,6 +99,17 @@ const MutationType = new GraphQLObjectType({
         });
       },
     },
+    addMember: {
+      type: MemberType,
+      args: {
+        dl: { type: GraphQLString },
+        name: { type: GraphQLString },
+        isAdmin: { type: GraphQLBoolean },
+      },
+      resolve(parent, theArgs) {
+        return myrepository.addNewMember({ ...theArgs });
+      },
+    },
   }),
 });
 
