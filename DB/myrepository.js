@@ -16,6 +16,7 @@ const addNewCar = async (carInfo) => {
     const newCar = new Car(carInfo);
     const x = await newCar.save();
     console.log("addNewCar", x);
+    return x;
   } catch (err) {
     console.error("Error while adding a new car: ", err);
   }

@@ -79,6 +79,30 @@ const RootQueryType = new GraphQLObjectType({
   }),
 });
 
+const MutationType = new GraphQLObjectType({
+  name: "MyRootMutation",
+  fields: () => ({
+    addCar: {
+      type: CarType,
+      args: {
+        manufacturer: { type: GraphQLString },
+        model: { type: GraphQLString },
+        year: { type: GraphQLInt },
+        plate: { type: GraphQLString },
+      },
+      resolve(parent, theArgs) {
+        return myrepository.addNewCar({
+          manufacturer: theArgs.manufacturer,
+          model: theArgs.model,
+          year: theArgs.year,
+          plate: theArgs.plate,
+        });
+      },
+    },
+  }),
+});
+
 module.exports = new GraphQLSchema({
   query: RootQueryType,
+  mutation: MutationType,
 });
